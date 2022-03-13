@@ -12,14 +12,19 @@ import com.example.recycleviewapp.Model.Event
 abstract class AppDatabase : RoomDatabase() {
     abstract fun eventDao() : EventRoomDAO
 
+    /**
+     * This is how you make this thread-safe
+     */
     companion object{
         @Volatile
         private var INSTANCE: AppDatabase? = null
         fun getDatabase(context: Context):AppDatabase{
             val tempInstance = INSTANCE
-            if(tempInstance != null){
-                return tempInstance
+
+            tempInstance?.let {
+                return it
             }
+
             synchronized(this){
                 val instance = Room.databaseBuilder(
                     context.applicationContext,

@@ -65,6 +65,11 @@ class EventViewHolder(itemView: View, private val eventClicked: EventClicked) : 
             eventClicked.onEventClicked(event)
         }
 
+        /**
+         * If you need to switch to another fragment, should happen in the fragment itself
+         *
+         * you can have another method in the interface for that.
+         */
         title.setOnClickListener {
             fragmentNavigation(
                 //manager, ThirdFragment.newInstance(event.Titulo,event.Categoria, event.Titulo)
